@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 
 import flats from '../../data/flats';
 import FlatList from './flat-list';
-//import Marker from './marker';
+import Marker from './marker';
 
 class App extends Component {
   constructor(props) {
@@ -15,9 +15,9 @@ class App extends Component {
   }
 
   selectFlat = (id) => {
-    console.log("Id: " + id);
+    console.log("Selected Id: " + id);
 
-    const found = this.state.flats.find(flat => flat.id === 3);
+    const found = this.state.flats.find(flat => flat.id === id);
     this.setState({ selectedFlat: found });
   }
 
@@ -36,9 +36,9 @@ class App extends Component {
           selectedFlat={this.state.selectedFlat}
           selectFlat={this.selectFlat}
         />
-        <div>
+        <div className="map-container">
           <GoogleMapReact defaultCenter={this.center()} defaultZoom={12}>
-
+            <Marker lat={this.state.selectedFlat.lat} lng={this.state.selectedFlat.lng} />
           </GoogleMapReact>
         </div>
       </div>
