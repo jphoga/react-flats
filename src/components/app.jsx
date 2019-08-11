@@ -14,6 +14,13 @@ class App extends Component {
     };
   }
 
+  selectFlat = (id) => {
+    console.log("Id: " + id);
+
+    const found = this.state.flats.find(flat => flat.id === 3);
+    this.setState({ selectedFlat: found });
+  }
+
   center() {
     return {
       lat: this.state.selectedFlat.lat,
@@ -25,7 +32,10 @@ class App extends Component {
     return (
       <div>
         <FlatList
-          flats={this.state.flats} />
+          flats={this.state.flats}
+          selectedFlat={this.state.selectedFlat}
+          selectFlat={this.selectFlat}
+        />
         <div>
           <GoogleMapReact defaultCenter={this.center()} defaultZoom={12}>
 
