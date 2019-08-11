@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import GoogleMapReact from 'google-map-react';
+
+import flats from '../../data/flats';
+import FlatList from './flat-list';
+//import Marker from './marker';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedFlat: flats[0],
+      flats
+    };
+  }
+
+  center() {
+    return {
+      lat: this.state.selectedFlat.lat,
+      lng: this.state.selectedFlat.lng
+    };
+  }
+
   render() {
     return (
-      <div className="card">
-        <div className="card-category">150 EUR</div>
-        <div className="card-description">
-          <h2>Super 60m2 in trendy neighborhood!</h2>
+      <div>
+        <FlatList
+          flats={this.state.flats} />
+        <div>
+          <GoogleMapReact defaultCenter={this.center()} defaultZoom={12}>
+
+          </GoogleMapReact>
         </div>
-        <a className="card-link" href="#"></a>
       </div>
     );
   }
